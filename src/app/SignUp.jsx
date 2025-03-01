@@ -6,7 +6,7 @@ const SignUp = () => {
   const handleGoogleSignUp = async () => {
     try {
       const result = await signInWithGoogle(auth, provider);
-
+      
       console.log("User signed up:", user);
     } catch (error) {
       console.error("Error signing in with Google", error);
@@ -15,7 +15,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <h2>Sign Up</h2>
       <button onClick={handleGoogleSignUp}>Sign Up with Google</button>
     </div>
   );

@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,15 +30,20 @@ const provider = new GoogleAuthProvider();
 const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      const user = result.user;
 
+      const user = result.user;
       // console.log(user)
       // Store user data in Firesto"re
+      console.log("Writing user to Firestore:", user.uid);
       setDoc(doc(db, "users", user.uid), {
+        email: user.email,
         name: user.displayName,
-        productivity: 0
+        productivity: 0,
+        profilePic: user.photoURL
       });
+
       console.log(result.user);
+      return result;
     })
     .catch((error) => {
       console.error(error);
@@ -46,4 +51,4 @@ const signInWithGoogle = () => {
 };
 
 // Export the required Firebase services
-export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc };
+export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc };
