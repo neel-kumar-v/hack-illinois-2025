@@ -1,8 +1,6 @@
 'use client'
 import MainCalendar from "@/components/Calendar/Calendar.jsx"
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import SignUp from "@/components/SignUp";
-import Login from "@/components/Login";
 import AddEvent from "@/app/Event";
 
 export default function Home() {
@@ -15,9 +13,6 @@ export default function Home() {
   return (
     <>
       <MainCalendar />
-      <SignUp />
-      <Login />
-      <AddEvent />
     </>
   );
 

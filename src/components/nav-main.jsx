@@ -25,11 +25,12 @@ export function NavMain({
 }) {
   return (
     (<SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel className="mb-2"><div className="font-bold text-xl md:text-3xl">Task Overflow</div></SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuButton key={item.title} asChild>
             <Link href={item.url}>
+                <item.icon className="w-5 h-5" />
                 {item.title}
             </Link>
             {/* <div className="ds">{item.title}</div> */}
