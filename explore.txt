@@ -1,0 +1,67 @@
+
+colors: {
+ 'text': '#08072c',
+ 'background': '#f8f8fc',
+ 'primary': '#121573',
+ 'secondary': '#ad69e8',
+ 'accent': '#891fc7',
+},
+
+colors: {
+ 'text': '#333333',
+ 'background': '#f7f7f7',
+ 'primary': '#4b91e2',
+ 'secondary': '#9f83e7',
+ 'accent': '#313473',
+},
+
+colors: {
+ 'text': '#0e0821',
+ 'background': '#f9f8fc',
+ 'primary': '#593acb',
+ 'secondary': '#dc86df',
+ 'accent': '#d666c4',
+},
+
+
+colors: {
+ 'text': '#e4def7',
+ 'background': '#040307',
+ 'primary': '#5434c5',
+ 'secondary': '#762079',
+ 'accent': '#992986',
+},
+
+colors: {
+ 'text': '#333333',
+ 'background': '#f7f7f7',
+ 'primary': '#4b91e2',
+ 'secondary': '#9f83e7',
+ 'accent': '#30405c',
+},
+
+colors: {
+ 'text': '#cccccc',
+ 'background': '#080808',
+ 'primary': '#1d64b4',
+ 'secondary': '#34187c',
+ 'accent': '#a5b4cf',
+},
+
+colors: {
+ 'text': '#07001f',
+ 'background': '#f6f5ff',
+ 'primary': '#7a64e5',
+ 'secondary': '#b079d4',
+ 'accent': '#9933c1',
+},
+
+#5aaf8c
+
+colors: {
+ 'text': '#ffffff',
+ 'background': '#0a182e',
+ 'primary': '#8c90ed',
+ 'secondary': '#5b1796',
+ 'accent': '#a338e0',
+},
