@@ -4,6 +4,7 @@ import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faL } from '@fortawesome/free-solid-svg-icons'
+import { DateRangeSlideTabs, DateNavigatorSlideTabs } from "../SlideTabs/SlideTabs";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css"
@@ -44,11 +45,7 @@ const components = {
 
 }
 
-const VIEW_OPTIONS = [
-  { id: Views.DAY, label: "Day" },
-  { id: Views.WEEK, label: "Week" },
-  { id: Views.MONTH, label: "Month" },
-];
+
 
 const localizer = momentLocalizer(moment);
 export default function MainCalendar() {
@@ -108,7 +105,7 @@ export default function MainCalendar() {
     if (view === Views.WEEK) {
       const from = moment(date).startOf("week");
       const to = moment(date).endOf("week");
-      return `${from.format("MMMM DD")} to ${to.format("MMMM DD")}`;
+      return `${from.format("MMMM DD")} - ${to.format("MMMM DD")}`;
     }
     return moment(date).format("MMMM YYYY");
   }, [view, date]);
@@ -119,30 +116,60 @@ export default function MainCalendar() {
 
   // const defaultDate = useMemo(() => new Date(2015, 3, 12), [])
 
-  function reformatNavigatorButtons() {
+  const VIEW_OPTIONS = [
+    { id: Views.DAY, label: "Day" },
+    { id: Views.WEEK, label: "Week" },
+    { id: Views.MONTH, label: "Month" },
+  ];
+  
+  const DATE_NAVIGATOR_OPTIONS = [
+    {
+      id: "Prev", 
+      onclick: onPrevClick,
+      children: <FontAwesomeIcon icon={faArrowLeft} />,
+    },
     
-  }
+    {
+      id: "Today", 
+      onclick: () => setDate(moment().toDate()),
+      children: "Today",
+    },
+    
+    {
+      id: "Next",
+      onclick: onNextClick,
+      children: <FontAwesomeIcon icon={faArrowRight} />,
+    }
+  ]
+  
 
   return (
-    <div className="flex flex-col h-[80%] w-full gap-2 p-2">
+    <div className="flex flex-col h-[80vh] w-full gap-2 p-2">
       <div className="flex justify-between items-center">
         <div className="w-[45%]">
-          
+          <DateRangeSlideTabs
+            viewOptions={VIEW_OPTIONS}
+            onclick={setView}
+          />
         </div>
 
-        <div className="flex justify-center items-center gap-4">
-          <div className="flex items-center gap-2">
+        <div className="flex justify-center items-center gap-x-2">
+          {/* <div className="flex items-center gap-2">
             <button onClick={onPrevClick} className="p-2">
-              <FontAwesomeIcon icon={faArrowLeft} />
+            <FontAwesomeIcon icon={faArrowLeft} />
             </button>
             <button onClick={() => setDate(moment().toDate())} className="px-4 py-2 bg-blue-500 text-white rounded">Today</button>
             <button onClick={onNextClick} className="p-2">
-              <FontAwesomeIcon icon={faArrowRight} />
+            <FontAwesomeIcon icon={faArrowRight} />
             </button>
-          </div>
+            </div> */}
+          
+          <DateNavigatorSlideTabs
+            navOptions={DATE_NAVIGATOR_OPTIONS}
+          />
         </div>
 
-        <div className="ml-auto px-4 py-2 bg-blue-500 text-white rounded text-center w-64">
+        <div className="ml-auto px-4 py-2 transition-all hover:bg-black/10 text-black rounded text-center w-fit">
           {dateText}
         </div>
       </div>

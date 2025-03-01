@@ -1,9 +1,3 @@
-/* @import 'tailwindcss' */
-
-
-
-
-
 .rbc-event {
     padding: 0.2rem 0 0.2rem 0.4rem !important;
     margin: 0.1rem 0.5rem !important;
@@ -24,4 +18,8 @@
     color: #373a3c;
     border: none;
     box-shadow: none !important;
+}
+
+.rbc-header {
+    border-bottom: none !important;
 }

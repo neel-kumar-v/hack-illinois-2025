@@ -1,19 +1,12 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FaHome } from "react-icons/fa";
-export const HoverSlideTabs = () => {
-  return (
-    <SlideTabs />
-  );
-};
-
-const SlideTabs = () => {
+export const DateRangeSlideTabs = ({ viewOptions, onclick }) => {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
     opacity: 0,
   });
-
   return (
     <ul
       onMouseLeave={() => {
@@ -22,35 +15,63 @@ const SlideTabs = () => {
           opacity: 0,
         }));
       }}
-      className="fixed left-1/2 -translate-x-1/2 top-4  flex w-fit rounded-full border-[0.8px] z-10 bg-white/[0.08] border-white/[0.08] backdrop-blur-lg p-1 px-5"
+      className="flex gap-x-2"
     >
-      <Tab setPosition={setPosition} href={"#"}>
-        <div className="group">Home</div>
-        </Tab>
       <Cursor position={position} />
-      <Tab setPosition={setPosition} href="#about">
-        <div className="group">About</div>
-        </Tab>
-      <Tab setPosition={setPosition} href="#projects">
-        <div className="group">Projects</div>
-        </Tab>
-      <Tab setPosition={setPosition} href="#experience">
-        <div className="group">Experience</div>
-        </Tab>
-      <Tab setPosition={setPosition} href="#contact">
-        <div className="group">Contact</div>
-        </Tab>
-
+      {viewOptions.map(({ id, label }) => (
+        <SlideTab
+          key={id}
+          setPosition={setPosition}
+          onclick={() => onclick(id)}
+          label={label}
+        />
+      ))}
+    </ul>
+  );
+};
+export const DateNavigatorSlideTabs = ({ navOptions }) => {
+  const [position, setPosition] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+  return (
+    <ul
+      onMouseLeave={() => {
+        setPosition((pv) => ({
+          ...pv,
+          opacity: 0,
+        }));
+      }}
+      className="flex justify-center items-center gap-4"
+    >
+      <Cursor position={position} />
+      {navOptions.map(({ id, onclick, children }) => (
+        <SlideTab
+          key={id}
+          setPosition={setPosition}
+          onclick={onclick}
+          label={children}
+        />
+      ))}
     </ul>
   );
 };
 
-const Tab = ({ children, setPosition, href }) => {
+const SlideTab = ({ onclick, label, setPosition }) => {
+  return (
+      <Tab setPosition={setPosition}  onclick={onclick}>
+        {label}
+      </Tab>
+  );
+};
+
+const Tab = ({ children, setPosition, onclick }) => {
   const ref = useRef(null);
 
   return (
-    <a
-      href={href}
+    <button
+      onClick={onclick}
       ref={ref}
       onMouseEnter={() => {
         if (!ref?.current) return;
@@ -63,10 +84,10 @@ const Tab = ({ children, setPosition, href }) => {
           opacity: 1,
         });
       }}
-      className="relative z-10 block cursor-pointer px-1.5  py-1.5 text-xs text-center  text-white mix-blend-lighten md:px-4  md:py-3 md:text-base"
+      className="relative z-10 block cursor-pointer p-1 text-xs text-center  text-black md:px-2  md:py-1.5 md:text-base"
     >
       {children}
-    </a>
+    </button>
   );
 };
 
@@ -76,7 +97,7 @@ const Cursor = ({ position }) => {
       animate={{
         ...position,
       }}
-      className="absolute z-1 h-7 rounded-full  backdrop-blur md:h-12"
+      className="absolute z-1 h-7 rounded-md bg-black/10  backdrop-blur md:h-[2.125rem]"
     />
   );
 };
