@@ -1,23 +1,23 @@
 'use client'
 import MainCalendar from "@/components/Calendar/Calendar.jsx"
+import Auth from "@/app/Auth";
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 import SignUp from "@/components/SignUp";
 import Login from "@/components/Login";
 import AddEvent from "@/app/Event";
+import AddTask from "@/app/Task";
+import ICS_Events from "@/app/ICS_Events";
 
 export default function Home() {
-  // const handleGoogle = async (e) => {
-  //     const provider = new GoogleAuthProvider();
-  //     return signInWithPopup(auth, provider);
-  //   }
-  // 
 
   return (
     <>
       <MainCalendar />
-      <SignUp />
-      <Login />
+      <Auth />
       <AddEvent />
+      <AddTask />
+      <ICS_Events />
+    </div>
     </>
   );
 
