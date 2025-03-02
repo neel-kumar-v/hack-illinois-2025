@@ -59,17 +59,18 @@ export function AppSidebar({
         title: "Calendar",
         url: "/calendar",  
         icon: CalendarFold,
-        isActive: true,
-      },
-      {
-        title: "Login / Sign Up",
-        url: "/login",
-        icon: LogIn,
+        // isActive: true,
       },
       {
         title: "Tasks",
         url: "#",
         icon: BookMarked
+      },
+      {
+        title: "Login / Sign Up",
+        url: "/login",
+        icon: LogIn,
+        isActive: true
       },
       {
         title: "Settings",
@@ -83,7 +84,9 @@ export function AppSidebar({
   //   return (<div>Loading Sidebar...</div>)
   // }
   if (user || loading) {
-    data.navMain = data.navMain.filter(item => item.url !== "/login ");
+    data.navMain = data.navMain.filter(item => item.url !== "/login");
+  } else {
+    data.navMain = data.navMain.filter(item => item.url === "/login");
   }
 
   return (

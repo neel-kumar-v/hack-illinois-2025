@@ -50,10 +50,36 @@ const signInWithGoogle = () => {
     });
 };
 
+const getUserEvents = async () => {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  try {
+    const eventIds = user.events;
+  } catch (error) {
+    console.error("Error getting events: ", error);
+    throw error;
+  }
+  for (let i = 0; i < eventIds.length; i++) {
+    const eventId = eventIds[i];
+    const eventRef = doc(db, "events", eventId);
+    const eventSnap = await getDoc(eventRef);
+    if (eventSnap.exists()) {
+      console.log("Event data:", eventSnap.data());
+    } else {
+      console.log("No such event!");
+    }
+  }
+  return eventIds;
+};
+
 const logout = () => {
   signOut(auth)
+  window.refresh()
   console.log("logged out")
 }
+
+getUserEvents();
 
 // Export the required Firebase services
 export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc, logout };
