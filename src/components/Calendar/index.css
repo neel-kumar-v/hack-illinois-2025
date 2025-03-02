@@ -23,3 +23,22 @@
 .rbc-header {
     border-bottom: none !important;
 }
+
+.rbc-addons-dnd-resize-ns-icon {
+    height: 1rem !important;
+    width: 100% !important;
+    border: none !important;
+}
+
+.rbc-addons-dnd-resize-ew-icon {
+    height: 100% !important;
+    width: 1rem !important;
+    border: none !important;
+}
+
+
+.rbc-current-time-indicator {
+    height: 0.125rem !important;
+}
+
+

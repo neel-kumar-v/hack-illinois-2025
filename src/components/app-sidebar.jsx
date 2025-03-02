@@ -2,23 +2,19 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  LogIn,
+  BookMarked,
+  CalendarFold,
+  Settings
 } from "lucide-react"
+
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import {auth} from "@/firebase/firebaseConfig"
 import { onAuthStateChanged } from "firebase/auth"
+import { Skeleton } from "./ui/skeleton"
 
 import {
   Sidebar,
@@ -30,6 +26,7 @@ import {
 
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ModeToggle } from "./ui/light-night-toggle"
 
 
 
@@ -57,51 +54,35 @@ export function AppSidebar({
       email: user.email,
       avatar: user.photoURL
     } : null,
-    teams: [
-      {
-        name: "Acme Inc",
-        logo: GalleryVerticalEnd,
-        plan: "Enterprise",
-      },
-      {
-        name: "Acme Corp.",
-        logo: AudioWaveform,
-        plan: "Startup",
-      },
-      {
-        name: "Evil Corp.",
-        logo: Command,
-        plan: "Free",
-      },
-    ],
     navMain: [
       {
         title: "Calendar",
         url: "/calendar",  
-        icon: SquareTerminal,
+        icon: CalendarFold,
         isActive: true,
       },
       {
-        title: "Login",
+        title: "Login / Sign Up",
         url: "/login",
-        icon: Bot,
+        icon: LogIn,
       },
       {
-        title: "Sign Up",
-        url: "/login",
-        icon: BookOpen,
+        title: "Tasks",
+        url: "#",
+        icon: BookMarked
       },
       {
         title: "Settings",
         url: "#",
-        icon: Settings2,
+        icon: Settings,
       },
+     
     ],
   }
   // if(loading) {
   //   return (<div>Loading Sidebar...</div>)
   // }
-  if (user) {
+  if (user || loading) {
     data.navMain = data.navMain.filter(item => item.title !== "Login" && item.title !== "Sign Up");
   }
 
@@ -113,15 +94,17 @@ export function AppSidebar({
       <SidebarContent>
         <NavMain items={data.navMain} />
         {/* <NavProjects projects={data.projects} /> */}
+        
       </SidebarContent>
       {
-        if (user) {
-          return (
-            <SidebarFooter>
-              <NavUser user={data.user} />
-            </SidebarFooter>
-          )
-        }
+        user ?
+        (<SidebarFooter>
+          <NavUser user={data.user} loading={false} />
+        </SidebarFooter>) : 
+        (loading ?
+          <SidebarFooter>
+          <NavUser user={data.user} loading={true} />
+        </SidebarFooter>  : null)
       }
       <SidebarRail />
     </Sidebar>

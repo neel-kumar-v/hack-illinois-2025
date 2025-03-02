@@ -15,7 +15,7 @@ export const DateRangeSlideTabs = ({ viewOptions, onclick }) => {
           opacity: 0,
         }));
       }}
-      className="flex gap-x-2"
+      className="flex gap-x-2 "
     >
       <Cursor position={position} />
       {viewOptions.map(({ id, label }) => (
@@ -43,7 +43,7 @@ export const DateNavigatorSlideTabs = ({ navOptions }) => {
           opacity: 0,
         }));
       }}
-      className="flex justify-center items-center gap-4"
+      className="flex justify-center items-center gap-4 "
     >
       <Cursor position={position} />
       {navOptions.map(({ id, onclick, children }) => (

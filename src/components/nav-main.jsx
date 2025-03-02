@@ -19,21 +19,21 @@ import {
 } from "@/components/ui/sidebar"
 
 import Link  from "next/link"
+import { ModeToggle } from "./ui/light-night-toggle";
 
 export function NavMain({
   items
 }) {
   return (
     (<SidebarGroup>
-      <SidebarGroupLabel className="mb-2"><div className="font-bold text-xl md:text-3xl">Task Overflow</div></SidebarGroupLabel>
+      <SidebarGroupLabel className="mb-2"> <div className=" font-semibold text-lg md:text-2xl ml-2">Task Overflow</div></SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
-          <SidebarMenuButton key={item.title} asChild>
-            <Link href={item.url}>
-                <item.icon className="w-5 h-5" />
-                {item.title}
+          <SidebarMenuButton key={item.title} asChild className="transition-all">
+            <Link href={item.url} className="text-xl flex flex-row align-center !py-6">
+                <item.icon className="!size-6" />
+                <p>{item.title}</p>
             </Link>
-            {/* <div className="ds">{item.title}</div> */}
           </SidebarMenuButton>
         ))}
       </SidebarMenu>

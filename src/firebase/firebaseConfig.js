@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore"
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,10 +22,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-let analytics;
-if (typeof window !== "undefined") {
-  analytics = getAnalytics(app);
-}
+
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -53,5 +50,10 @@ const signInWithGoogle = () => {
     });
 };
 
+const logout = () => {
+  signOut(auth)
+  console.log("logged out")
+}
+
 // Export the required Firebase services
-export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc };
+export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc, logout };

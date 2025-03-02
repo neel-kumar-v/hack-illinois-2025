@@ -1,4 +1,4 @@
-import React, { Component, useState, useCallback, useMemo} from "react";
+import React, { Component, useState, useCallback, useMemo, cloneElement } from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -38,12 +38,7 @@ const events = [
   }, 
 ];
 
-const components = {
-  event: (props) => {
 
-  },
-
-}
 
 
 
@@ -52,6 +47,12 @@ export default function MainCalendar() {
   const [myEvents, setMyEvents] = useState(events)
   const [date, setDate] = useState(moment().toDate());
   const [view, setView] = useState(Views.WEEK);
+  const [contextMenuInfo, setContextMenuInfo] = useState({ 
+    xPosition: 0, 
+    yPosition: 0, 
+    selectedTime: null, 
+    resourceId: null 
+  });
 
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -114,7 +115,32 @@ export default function MainCalendar() {
     setDate(moment().toDate());
   }, [])
 
-  // const defaultDate = useMemo(() => new Date(2015, 3, 12), [])
+  const components = {
+    timeSlotWrapper: ({
+      children,
+      value,
+      resource,
+    }) => {
+      return (
+        <div
+          onContextMenu={(e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Add this to stop event bubbling
+            setContextMenuInfo({
+              xPosition: e.clientX,
+              yPosition: e.clientY,
+              selectedTime: value,
+              resourceId: resource,
+            });
+            return false; // Additional prevention measure
+          }}
+        >
+          {children}
+        </div>
+      );
+  
+    },
+  }
 
   const VIEW_OPTIONS = [
     { id: Views.DAY, label: "Day" },
@@ -144,7 +170,7 @@ export default function MainCalendar() {
   
 
   return (
-    <div className="flex flex-col h-[80vh] w-full gap-2 p-2">
+    <div className="flex flex-col h-screen w-full gap-2 p-2">
       <div className="flex justify-between items-center">
         <div className="w-[45%]">
           <DateRangeSlideTabs
@@ -154,16 +180,6 @@ export default function MainCalendar() {
         </div>
 
         <div className="flex justify-center items-center gap-x-2">
-          {/* <div className="flex items-center gap-2">
-            <button onClick={onPrevClick} className="p-2">
-            <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <button onClick={() => setDate(moment().toDate())} className="px-4 py-2 bg-blue-500 text-white rounded">Today</button>
-            <button onClick={onNextClick} className="p-2">
-            <FontAwesomeIcon icon={faArrowRight} />
-            </button>
-            </div> */}
-          
           <DateNavigatorSlideTabs
             navOptions={DATE_NAVIGATOR_OPTIONS}
           />
@@ -184,6 +200,7 @@ export default function MainCalendar() {
         onView={setView}
         view={view}
         onNavigate={setDate}
+        components={components}
       />
     </div>
   )
