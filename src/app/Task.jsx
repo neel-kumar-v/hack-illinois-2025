@@ -29,6 +29,15 @@ const AddTask = () => {
         }
     };
 
+    const GenerateEventFromTask = async () => {
+        try {
+            await AddEventToDB();
+            console.log("Event generated from task");
+        } catch (error) {
+            console.error("Error generating event from task", error);
+        }
+    };
+
   return (
     <div>
       <button onClick={AddTaskToDB}>Add Task</button>
