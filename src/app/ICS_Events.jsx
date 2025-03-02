@@ -44,7 +44,7 @@ const populateICalEvents = async (icsUrl) => {
 export default function ICS_Events({icsUrl}) {
   return (
     <div>
-      <button onClick={() => populateICalEvents(icsUrl)}>ics_events</button>
+      {/* <button onClick={() => populateICalEvents(icsUrl)}>ics_events</button> */}
     </div>
   );
 }

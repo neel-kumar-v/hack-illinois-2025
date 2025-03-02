@@ -40,7 +40,7 @@ const AddTask = () => {
 
   return (
     <div>
-      <button onClick={AddTaskToDB}>Add Task</button>
+      {/* <button onClick={AddTaskToDB}>Add Task</button> */}
     </div>
   );
 };
