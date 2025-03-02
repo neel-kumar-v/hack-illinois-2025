@@ -1,5 +1,7 @@
 // src/components/SignUp.jsx
+'use client'
 import React from "react";
+import { Button } from "@/components/ui/button"
 import {auth, provider, db, signInWithGoogle, doc, setDoc} from "@/firebase/firebaseConfig.js";
 
 const SignUp = () => {
@@ -14,9 +16,12 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleGoogleSignUp}>Sign Up with Google</button>
-    </div>
+    <>
+      <button onClick={handleGoogleSignUp} className="underline underline-offset-4 cursor-pointer">
+        Sign Up
+        </button>
+      {/* <button onClick={handleGoogleSignUp}>Sign Up with Google</button> */}
+    </>
   );
 };
 
