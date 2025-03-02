@@ -1,6 +1,6 @@
 import axios from "axios";
 import ICAL from "ical.js";
-import { AddEventToDB } from "@/app/Event.jsx";
+import { AddEvent } from "@/app/Event.jsx";
 
 const fetchICalEvents = async (icsUrl) => {
     console.log(icsUrl);

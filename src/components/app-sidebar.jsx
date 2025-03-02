@@ -83,7 +83,7 @@ export function AppSidebar({
   //   return (<div>Loading Sidebar...</div>)
   // }
   if (user || loading) {
-    data.navMain = data.navMain.filter(item => item.title !== "Login" && item.title !== "Sign Up");
+    data.navMain = data.navMain.filter(item => item.url !== "/login ");
   }
 
   return (

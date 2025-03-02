@@ -2,7 +2,7 @@ import React from 'react';
 import { auth, provider, db, doc, setDoc, addDoc } from "@/firebase/firebaseConfig.js";
 import { v4 as uuidv4 } from 'uuid';
 
-export const AddEventToDB = async (title = "", description = "", start = "", end = "", category = "", task = null) => {
+export const AddEvent = async (title = "", description = "", start = "", end = "", category = "", task = null) => {
 
     try {
         if (!title || !description || !start || !end) {
