@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, doc, setDoc, addDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc, getDoc, addDoc, updateDoc, Timestamp, arrayUnion } from "firebase/firestore"
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -82,4 +82,4 @@ const logout = () => {
 getUserEvents();
 
 // Export the required Firebase services
-export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc, logout };
+export { app, auth, provider, db, analytics, signInWithGoogle, doc, setDoc, addDoc, getDoc, updateDoc, logout, Timestamp, arrayUnion };
