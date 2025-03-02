@@ -9,14 +9,14 @@ import AddTask from "@/app/Task";
 import ICS_Events from "@/app/ICS_Events";
 
 export default function Home() {
+  const icsUrl = "./example.ics";
 
   return (
     <>
       <MainCalendar />
       <Auth />
-      <AddEvent />
       <AddTask />
-      <ICS_Events />
+      <ICS_Events icsUrl = {icsUrl}/>
     </div>
     </>
   );
