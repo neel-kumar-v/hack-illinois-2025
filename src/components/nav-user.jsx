@@ -34,6 +34,8 @@ import {logout} from "@/firebase/firebaseConfig.js"
 
 import { Skeleton } from "./ui/skeleton"
 
+import Link from "next/link"
+
 export function NavUser({
   user, loading
 }) {
@@ -88,7 +90,10 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout}> 
+              <Link href='/login' >
+                Log Out
+            </Link></button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

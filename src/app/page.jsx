@@ -1,9 +1,8 @@
-'use client'
 import MainCalendar from "@/components/Calendar/Calendar.jsx"
-import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import SignUp from "@/components/SignUp";
-import Login from "@/components/Login";
-import AddEvent from "@/app/Event";
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/firebase/firebaseConfig'
+import { LoginForm } from "@/components/login-form"
+import {AddEvent} from "@/app/Event";
 import AddTask from "@/app/Task";
 import ICS_Events from "@/app/ICS_Events";
 
@@ -16,7 +15,10 @@ export default function Home() {
     <>
     <ICS_Events icsUrl="./example.ics"/>
     <AddTask />
-      <MainCalendar />
+    {/* <MainCalendar /> */}
+      <AddEvent />
+      <AddTask />
+      <ICS_Events />
     </>
   );
 

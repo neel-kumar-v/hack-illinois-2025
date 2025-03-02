@@ -36,9 +36,22 @@
     border: none !important;
 }
 
+.rbc-time-header-cell {
+    text-align: center;
+}
+
+.rbc-time-header-cell::before {
+    content: attr(data-time);
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
 
 .rbc-current-time-indicator {
     height: 0.125rem !important;
+    background-color: #ff0000 !important;
 }
 
 

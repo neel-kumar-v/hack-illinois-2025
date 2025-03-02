@@ -1,6 +1,6 @@
 import axios from "axios";
 import ICAL from "ical.js";
-import { AddEventToDB } from "@/app/Event.jsx";
+import { AddEvent } from "@/app/Event.jsx";
 
 const fetchICalEvents = async (icsUrl) => {
     console.log(icsUrl);
@@ -44,7 +44,7 @@ const populateICalEvents = async (icsUrl) => {
 export default function ICS_Events({icsUrl}) {
   return (
     <div>
-      <button onClick={() => populateICalEvents(icsUrl)}>ics_events</button>
+      {/* <button onClick={() => populateICalEvents(icsUrl)}>ics_events</button> */}
     </div>
   );
 }
