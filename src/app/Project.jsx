@@ -2,7 +2,7 @@ import React from 'react';
 import { auth, provider, db, doc, setDoc, addDoc } from "@/firebase/firebaseConfig.js";
 import { v4 as uuidv4 } from 'uuid';
 
-export const AddProjectToDB = async (categories = [], description = "", progress = 0, task = null, user = null) => {
+export const AddProject = async (categories = [], description = "", progress = 0, task = null, user = null) => {
     try {
         if (!categories || !progress || !task || !user || !description) {
             console.error("Missing required fields");
@@ -56,7 +56,7 @@ export const GenerateTaskFromProject = async (project_description) => {
         console.log("Generated Tasks:", generatedTasks);
 
         // Call AddEventToDB to save the generated tasks (if needed)
-        await AddTaskToDB(generatedTasks); // Pass the generated tasks to AddTaskToDB
+        await AddTask(generatedTasks); // Pass the generated tasks to AddTask
 
         console.log("Event generated from task");
     } catch (error) {

@@ -16,6 +16,7 @@ import { Slider } from "@/components/ui/slider"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { cn } from "@/lib/utils"
+import {toast} from "sonner"
 
 // Define event color options
 const colorOptions = [
@@ -68,8 +69,22 @@ export default function EventModal({ open, onOpenChange, onSave, event }) {
   const [assignedUsers, setAssignedUsers] = event ? useState(event.assignedUsers) : useState([])
   const [userComboboxOpen, setUserComboboxOpen] = useState(false)
 
+  const getToast = () => {
+    console.log("toast created")
+    return (
+      toast("Event has been created", {
+        description: "Sunday, December 03, 2023 at 9:00 AM",
+        action: {
+          label: "Undo",
+          onClick: () => console.log("Undo"),
+        },
+      })
+      
+    )
+  }
   const handleSave = () => {
     if (onSave) {
+        printState()
       onSave({
         title,
         color,
@@ -84,6 +99,21 @@ export default function EventModal({ open, onOpenChange, onSave, event }) {
     }
     resetForm()
     onOpenChange(false)
+
+  }
+
+  const printState = () => {
+    console.log("Event has been created: ", {
+        title,
+        color,
+        start,
+        end,
+        tags,
+        difficulty,
+        isFinished,
+        isBlockOut,
+        assignedUsers,
+    })
   }
 
   const resetForm = () => {
@@ -104,22 +134,26 @@ export default function EventModal({ open, onOpenChange, onSave, event }) {
       setTags([...tags, newTag])
       setNewTag("")
     }
+    printState();
   }
 
   const removeTag = (tagToRemove) => {
     setTags(tags.filter((tag) => tag !== tagToRemove))
+    printState();
   }
 
   const addPredefinedTag = (tag) => {
     if (!tags.includes(tag)) {
       setTags([...tags, tag])
     }
+    printState();
   }
 
   const toggleUser = (userId) => {
     setAssignedUsers((current) =>
       current.includes(userId) ? current.filter((id) => id !== userId) : [...current, userId],
     )
+    printState();
   }
 
   const handleStartTimeChange = (timeString) => {
@@ -130,6 +164,7 @@ export default function EventModal({ open, onOpenChange, onSave, event }) {
     
     newDate.setHours(hours, minutes, 0, 0)
     setStart(newDate)
+    printState();
   }
 
   // Function to handle time selection for end
@@ -141,6 +176,7 @@ export default function EventModal({ open, onOpenChange, onSave, event }) {
     
     newDate.setHours(hours, minutes, 0, 0)
     setEnd(newDate)
+    printState();
   }
 
   return (

@@ -1,11 +1,10 @@
 import React from 'react';
 import { auth, provider, db, doc, setDoc, addDoc, getDoc } from "@/firebase/firebaseConfig.js";
 import { v4 as uuidv4 } from 'uuid';
-import { AddEventToDB } from "@/app/Event.jsx";
-import { useState } from 'react';
+import { AddEvent } from "@/app/Event.jsx";
 
 const AddTask = () => {
-  const [sortedDocuments, setSortedDocuments] = useState([]);
+  let sortedDocuments = [];
     const GenerateEventFromTask = async (title, deadline, category, task, description, hours) => {
  
         // Example: List of document references you want to sort
@@ -45,7 +44,7 @@ const AddTask = () => {
           // Sort documents by timestamp (ascending)
           documentsWithTimestamp.sort((a, b) => a.start - b.start);
     
-          setSortedDocuments(documentsWithTimestamp);
+         sortedDocuments = documentsWithTimestamp;
         };
     
         sortReferencesByTimestamp(eventsArray);
@@ -73,20 +72,32 @@ const AddTask = () => {
             }
         });
 
-        if (gap >= 1) {
+        if (best_start == best_end) {
+          let diff = (deadline.getTime() - cur_time_begin_iteration) / 1000 / 60 / 60;
+          if (cur_time_begin_iteration < deadline.getTime()) {
+            if (diff >= 1) {
+              largest_gap = diff;
+              best_start = cur_time_begin_iteration;
+              best_end = deadline.getTime();
+            }
+          }
+        }
+
+        if (largest_gap >= 1) {
             best_start = Math.floor(gap) + best_start;
             best_end = Math.floor(gap) + 3600000;
-            AddEventToDB(title, description, new Date(best_start), new Date(best_end), category, task);
+            AddEvent(title, description, new Date(best_start), new Date(best_end), category, task);
         } else {
             console.log("No more time slots available");
             break;
         }
         //call sort function again
+        sortReferencesByTimestamp(sortedDocuments)
       }
     }
 
 
-    const AddTaskToDB = async () => {
+    const AddTask = async () => {
         try {
             const user = auth.currentUser;
             const uniqueId = uuidv4(); // Generate a unique ID
@@ -94,7 +105,7 @@ const AddTask = () => {
                 // User is signed in, get user details
                 const taskData = {
                     category: "Sample Task",
-                    deadline: new Date().toISOString(),
+                    deadline: new Date(),
                     description: "Sample Location",
                     difficulty: 0,
                     finished: false,
@@ -116,7 +127,7 @@ const AddTask = () => {
 
   return (
     <div>
-      {/* <button onClick={AddTaskToDB}>Add Task</button> */}
+      {/* {<button onClick={AddTask}>Add Task</button> } */}
     </div>
   );
 };
