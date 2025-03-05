@@ -5,13 +5,15 @@ import {
   LogIn,
   BookMarked,
   CalendarFold,
-  Settings
+  Settings,
+  Plus
 } from "lucide-react"
 
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
+import { SidebarSeparator } from "@/components/ui/sidebar"
 import {auth} from "@/firebase/firebaseConfig"
 import { onAuthStateChanged } from "firebase/auth"
 import { Skeleton } from "./ui/skeleton"
@@ -73,11 +75,11 @@ export function AppSidebar({
         isActive: true
       },
       {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-      },
-     
+        title: "Add Project",
+        url: "/projects",
+        icon: Plus,
+        isActive: true
+      }
     ],
   }
   // if(loading) {
@@ -99,6 +101,7 @@ export function AppSidebar({
         {/* <NavProjects projects={data.projects} /> */}
         
       </SidebarContent>
+      <SidebarSeparator></SidebarSeparator>
       {
         user ?
         (<SidebarFooter>
