@@ -4,7 +4,7 @@ import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight, faL } from '@fortawesome/free-solid-svg-icons'
 import { DateRangeSlideTabs, DateNavigatorSlideTabs } from "../SlideTabs/SlideTabs";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
@@ -12,7 +12,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 
 import './index.css'
 import EventModal from "../Create/Create";
-import { Toaster } from "@/components/ui/sonner";
 import { time } from "framer-motion";
 
 // Define event color options
@@ -143,7 +142,8 @@ let baseEvents = [
 const localizer = momentLocalizer(moment);
 
 const TimeHeaderCell = ({ children, value }) => {
-  const time = moment(value).format("h A");
+  const time = moment(value).format("hA");
+  console.log("Time: ", time) 
   return (
     <div className="rbc-time-header-cell">
       {time}
@@ -151,31 +151,34 @@ const TimeHeaderCell = ({ children, value }) => {
   );
 };
 
-const components = {
-  timeSlotWrapper: ({ children, value }) => {
-
-    return children
-  },
-  timeHeaderCell: TimeHeaderCell,
-  event: ({ event }) => {
-    if (event?.isBlockedOut) {
-      return (
-        <div className="bg-black/10">
-          {event.title}
-        </div>
-      )
-    }
-    if (event?.color) {
-      return (
-        <div className={`rbc-event ${event.color}`}>
-          {event.title}
-        </div>
-      )
-    }
-  }
-};
 
 export default function MainCalendar() {
+  const components = {
+    timeSlotWrapper: ({ children, value }) => {
+      if (value.getHours() < 8 || value.getHours() > 18) {
+        return <div style={{ background: "rgba(0, 0, 0, 0.05)" }}>{children}</div>
+      }
+      // console.log("Children: ", children.props.children)
+      return children
+    },
+    timeHeaderCell: TimeHeaderCell,
+    event: ({ event }) => {
+      if (event?.color) {
+        return (
+          <div className={`rbc-event ${event.color}`}>
+            {event.title}
+          </div>
+        )
+      }
+      if (event?.isBlockedOut) {
+        return (
+          <div className="rbc-event-blocked-out">
+            {event.title}
+          </div>
+        )
+      }
+    }
+  };
   const [events, setEvents] = useState(baseEvents)
   const [eventData, setEventData] = useState(null)
   const [date, setDate] = useState(moment().toDate());

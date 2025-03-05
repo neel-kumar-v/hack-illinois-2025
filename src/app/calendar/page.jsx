@@ -1,7 +1,7 @@
 'use client'
 import MainCalendar from "@/components/Calendar/Calendar.jsx"
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import AddTask from "@/app/Task";
+import AddEvent from "@/app/Event";
 
 export default function Home() {
   // const handleGoogle = async (e) => {
@@ -12,7 +12,6 @@ export default function Home() {
 
   return (
     <>
-      <AddTask />
       <MainCalendar />
     </>
   );

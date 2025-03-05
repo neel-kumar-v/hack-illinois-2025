@@ -1,6 +1,6 @@
 .rbc-event {
-    /* padding: 0.2rem 0 0.2rem 0.4rem !important; */
-    /* margin: 0.1rem 0.5rem !important; */
+    padding: 0.2rem 0 0.2rem 0.4rem !important;
+    margin: 0.1rem 0.5rem !important;
     width: calc(100% - 1rem);
 }
 
@@ -47,38 +47,7 @@
     font-weight: bold;
 }
 
-.rbc-header {
-    color: white;
-    font-size: 1rem !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 1.75rem !important;
-    background: rgba(20, 40, 255, 0.6) !important;
-    font-weight: 400;
-}
 
-.rbc-all-cell {
-    display: none;
-}
-
-
-
-.rbc-event {
-    border: none !important;
-    padding: 0rem !important;
-}
-
-.rbc-addons-dnd-resizable {
-    padding: 0.4rem !important;
-}
-
-.rbc-time-header-cell .rbc-today {
-    background: #eaf6ff !important;
-    color: black;
-    
-    font-weight: 800;
-}
 
 .rbc-current-time-indicator {
     height: 0.125rem !important;

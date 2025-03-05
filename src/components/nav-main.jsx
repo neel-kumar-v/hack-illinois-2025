@@ -30,8 +30,8 @@ export function NavMain({
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuButton key={item.title} asChild className="transition-all">
-            <Link href={item.url} className="text-md flex flex-row align-center !first:pt-0 !last:pb-0 !py-3">
-                <item.icon className="!size-6 stroke-[1.3]" />
+            <Link href={item.url} className="text-xl flex flex-row align-center !first:pt-0 !last:pb-0 !py-6">
+                <item.icon className="!size-6" />
                 <p>{item.title}</p>
             </Link>
           </SidebarMenuButton>

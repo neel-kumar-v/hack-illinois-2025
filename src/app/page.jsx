@@ -16,7 +16,7 @@ export default function Home() {
     <ICS_Events icsUrl="./example.ics"/>
     <AddTask />
     {/* <MainCalendar /> */}
-      {/* <AddEvent /> */}
+      <AddEvent />
       <AddTask />
       <ICS_Events />
     </>

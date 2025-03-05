@@ -36,7 +36,7 @@ const populateICalEvents = async (icsUrl) => {
     events.forEach((event) => {
         //event.recurrenceRule, event.recurrenceId,
         console.log(event)
-        AddEvent(event.title,event.description, event.start, event.end);
+        AddEventToDB(event.title,event.description, event.start, event.end);
     });
     console.log("success!");
 }
