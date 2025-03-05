@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  BadgeCheck,
+  Settings,
   Bell,
   ChevronsUpDown,
   CreditCard,
@@ -79,7 +79,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheck />
+                <Settings />
                 Account
               </DropdownMenuItem>
               <DropdownMenuItem>
